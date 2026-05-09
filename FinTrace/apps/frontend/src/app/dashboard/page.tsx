@@ -24,7 +24,7 @@ export default function DashboardPage() {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500 mb-4"></div>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-500 mb-4"></div>
           <p className="text-slate-400">Loading...</p>
         </div>
       </div>
@@ -66,7 +66,7 @@ export default function DashboardPage() {
                     <span className="text-white font-semibold">127</span>
                   </div>
                   <div className="w-full bg-slate-700 rounded-full h-2">
-                    <div className="bg-purple-600 h-2 rounded-full" style={{ width: '78%' }}></div>
+                    <div className="bg-cyan-600 h-2 rounded-full" style={{ width: '78%' }}></div>
                   </div>
                 </div>
                 <div>

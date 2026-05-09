@@ -7,11 +7,11 @@ import { Button } from '@/components';
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-cyan-900 to-emerald-900">
       {/* Navigation */}
       <nav className="bg-slate-900/50 backdrop-blur border-b border-slate-700 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+          <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-emerald-400">
             FinTrace
           </h1>
           <Link href="/login">
@@ -56,7 +56,7 @@ export default function HomePage() {
             { title: 'Alert Management', description: 'Intelligent alert triage and routing' },
             { title: 'Evidence Export', description: 'Generate FIU-compliant reports' },
           ].map((feature, i) => (
-            <div key={i} className="bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-purple-500 transition">
+            <div key={i} className="bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-cyan-500 transition">
               <h4 className="text-lg font-semibold text-white mb-2">{feature.title}</h4>
               <p className="text-slate-400">{feature.description}</p>
             </div>

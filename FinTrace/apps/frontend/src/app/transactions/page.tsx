@@ -2,9 +2,8 @@
 
 'use client';
 
-import { useEffect, useState } from 'react';
-import { useAuth } from '@/hooks/useAuth';
-import { NavBar, Card, CardHeader, CardTitle, CardContent, Button } from '@/components';
+import { useState } from 'react';
+import { NavBar, Card, CardHeader, CardTitle, CardContent } from '@/components';
 import { Search } from 'lucide-react';
 
 interface Transaction {
@@ -19,8 +18,7 @@ interface Transaction {
 }
 
 export default function TransactionsPage() {
-  const { user, loading: authLoading } = useAuth();
-  const [transactions, setTransactions] = useState<Transaction[]>([
+  const [transactions] = useState<Transaction[]>([
     {
       id: 'TXN-001',
       sourceAccountId: 'ACC-2024-001',
@@ -130,7 +128,7 @@ export default function TransactionsPage() {
                 placeholder="Search by Transaction ID, Account ID..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-purple-500"
+                className="w-full pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
               />
             </div>
           </CardContent>

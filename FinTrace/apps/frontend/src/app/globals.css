@@ -5,29 +5,17 @@
 :root {
   --background: 0 0% 100%;
   --foreground: 222.2 84% 4.9%;
-  --card: 0 0% 100%;
-  --primary: 222.2 47.6% 11.2%;
-  --secondary: 210 40% 96%;
-  --muted: 210 40% 96%;
-  --destructive: 0 84.2% 60.2%;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-    --card: 217.2 32.6% 17.5%;
-    --primary: 210 40% 98%;
-    --secondary: 217.2 32.6% 17.5%;
-    --muted: 217.2 32.6% 17.5%;
   }
 }
 
-* {
-  @apply border-border;
-}
-
 body {
-  @apply bg-background text-foreground;
+  background-color: rgb(3, 7, 18);
+  color: rgb(226, 232, 240);
   font-feature-settings: "rounding-mode" 0;
 }

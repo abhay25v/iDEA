@@ -38,7 +38,8 @@ cd apps/backend && npm install && npm run dev
 cd apps/frontend && npm install && npm run dev
 
 # ML Service (in new terminal)
-cd apps/ml-service && pip install poetry && poetry install && poetry run uvicorn app.main:app --reload
+cd apps/ml-service
+py -3.12 -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 # Access
 # Frontend: http://localhost:3000
@@ -140,6 +141,19 @@ npm test
 # Kill process on port 5000
 lsof -ti:5000 | xargs kill -9  # macOS/Linux
 netstat -ano | findstr :5000 && taskkill /PID <PID> /F  # Windows
+```
+
+**ML service import error?**
+Use `app.main:app`, not `main:app`:
+```bash
+cd apps/ml-service
+poetry run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+If `poetry` is not installed on your machine, use the active Python environment instead:
+```powershell
+cd D:\Download\iDEA\FinTrace\apps\ml-service
+py -3.12 -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 **Database connection errors?**

@@ -1,4 +1,4 @@
-import { Card, CardContent } from './Card';
+import { Card } from './Card';
 import React from 'react';
 
 interface StatCardProps {
@@ -16,12 +16,12 @@ export const StatCard: React.FC<StatCardProps> = ({ title, value, change, icon }
           <p className="text-sm text-slate-400 mb-1">{title}</p>
           <p className="text-3xl font-bold text-white">{value}</p>
           {change !== undefined && (
-            <p className={`text-sm mt-2 ${change >= 0 ? 'text-red-400' : 'text-green-400'}`}>
+            <p className={`text-sm mt-2 ${change >= 0 ? 'text-green-400' : 'text-red-400'}`}>
               {change >= 0 ? '↑' : '↓'} {Math.abs(change)}% from yesterday
             </p>
           )}
         </div>
-        {icon && <div className="text-3xl text-purple-400">{icon}</div>}
+        {icon && <div className="text-3xl text-cyan-300">{icon}</div>}
       </div>
     </Card>
   );

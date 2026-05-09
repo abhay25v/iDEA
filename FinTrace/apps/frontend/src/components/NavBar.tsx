@@ -21,7 +21,7 @@ export const NavBar: React.FC<NavBarProps> = ({ title = 'FinTrace', showNav = tr
     <nav className="bg-slate-900/80 backdrop-blur border-b border-slate-700 sticky top-0 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
         <Link href="/" className="flex items-center gap-2">
-          <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+          <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-emerald-400">
             {title}
           </h1>
         </Link>

@@ -3,8 +3,7 @@
 'use client';
 
 import { useState } from 'react';
-import { useAuth } from '@/hooks/useAuth';
-import { NavBar, Card, CardHeader, CardTitle, CardContent, Button } from '@/components';
+import { NavBar, Card, CardContent, Button } from '@/components';
 
 interface Alert {
   id: string;
@@ -20,8 +19,7 @@ interface Alert {
 }
 
 export default function AlertsPage() {
-  const { user, loading: authLoading } = useAuth();
-  const [alerts, setAlerts] = useState<Alert[]>([
+  const [alerts] = useState<Alert[]>([
     {
       id: '1',
       type: 'rapid_transactions',
@@ -100,7 +98,7 @@ export default function AlertsPage() {
               onClick={() => setFilter(tab.id)}
               className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
                 filter === tab.id
-                  ? 'border-purple-600 text-purple-400'
+                  ? 'border-cyan-500 text-cyan-300'
                   : 'border-transparent text-slate-400 hover:text-slate-300'
               }`}
             >
@@ -131,7 +129,7 @@ export default function AlertsPage() {
                         <p className="text-slate-400">Account ID</p>
                         <p className="text-white font-mono">{alert.accountId}</p>
                       </div>
-                      {alert.amount > 0 && (
+                      {typeof alert.amount === 'number' && alert.amount > 0 && (
                         <div>
                           <p className="text-slate-400">Amount</p>
                           <p className="text-white font-semibold">${alert.amount.toLocaleString()}</p>
