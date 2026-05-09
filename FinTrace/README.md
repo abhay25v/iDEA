@@ -88,8 +88,7 @@ FinTrace/
 - Docker & Docker Compose
 - Node.js 18+
 - Python 3.10+
-- Neo4j 5.0+
-- MongoDB 5.0+
+- Git
 
 ### Installation
 
@@ -102,25 +101,80 @@ cd FinTrace
 2. **Setup environment**
 ```bash
 cp .env.example .env
-# Edit .env with your configuration
 ```
 
 3. **Start services with Docker Compose**
 ```bash
-docker-compose up -d
+docker compose up -d mongodb neo4j redis
 ```
+Wait ~10 seconds for services to fully start.
 
 4. **Seed sample data**
 ```bash
-npm run seed
+npm --prefix apps/backend run seed
 ```
 
-5. **Access the application**
+5. **Start the backend**
+```bash
+cd apps/backend
+npm install
+npm run dev
+```
+
+6. **Start the frontend** (in a new terminal)
+```bash
+cd apps/frontend
+npm install
+npm run dev
+```
+
+7. **Access the application**
 - Frontend: http://localhost:3000
 - Backend API: http://localhost:5000
-- ML Service: http://localhost:8000
-- Neo4j Browser: http://localhost:7687
-- MongoDB Compass: localhost:27017
+- Neo4j Browser: http://localhost:7474
+- MongoDB connection: `mongodb://127.0.0.1:27017/fintrace`
+
+## 🔍 Local Development Setup
+
+### Environment Variables for Local Dev
+
+The default `.env.example` values work for local development with Docker Compose. Key settings:
+
+```bash
+# Use 127.0.0.1 (not localhost) to avoid IPv6 issues on Windows
+MONGODB_URI=mongodb://127.0.0.1:27017/fintrace
+NEO4J_URI=bolt://127.0.0.1:7687
+REDIS_URL=redis://127.0.0.1:6379
+
+# Set to localhost:3000 for CORS
+CORS_ORIGIN=http://localhost:3000
+```
+
+### Database Connection
+
+If running the backend locally *without* Docker Compose, use **IPv4 loopback** to avoid connection timeouts:
+
+```powershell
+# PowerShell
+$env:MONGODB_URI="mongodb://127.0.0.1:27017/fintrace"
+$env:NEO4J_URI="bolt://127.0.0.1:7687"
+npm run dev
+```
+
+### Troubleshooting
+
+**Backend won't start?**
+- Ensure Docker services are running: `docker compose ps`
+- Check MongoDB is healthy: `docker compose logs mongodb --tail 20`
+- Verify port 5000 is not in use: `netstat -an | findstr :5000`
+
+**Login fails?**
+- Seed the database: `npm --prefix apps/backend run seed`
+- Check MongoDB has users: `docker compose exec mongodb mongosh -u admin -p admin123 --authenticationDatabase admin`
+
+**Can't connect to Neo4j?**
+- Use `127.0.0.1` instead of `localhost` in connection URIs
+- Check firewall isn't blocking port 7687
 
 ## 🔐 Authentication
 
