@@ -1,0 +1,12 @@
+{
+  "name": "@fintrace/shared",
+  "version": "1.0.0",
+  "description": "Shared types and utilities",
+  "main": "types/index.ts",
+  "types": "types/index.ts",
+  "keywords": [
+    "fintrace",
+    "shared",
+    "types"
+  ]
+}
