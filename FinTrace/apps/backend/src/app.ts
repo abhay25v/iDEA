@@ -77,9 +77,20 @@ export async function initializeServer(): Promise<void> {
     // Connect to databases
     logger.info('Connecting to databases...');
     await connectMongoDB();
-    await connectNeo4j();
-    await connectRedis();
-    logger.info('All databases connected successfully');
+
+    try {
+      await connectNeo4j();
+    } catch (error) {
+      logger.warn('Neo4j is unavailable; continuing without graph features');
+    }
+
+    try {
+      await connectRedis();
+    } catch (error) {
+      logger.warn('Redis is unavailable; continuing without cache features');
+    }
+
+    logger.info('Core services connected successfully');
 
     // Start server
     const port = config.port;

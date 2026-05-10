@@ -1,8 +1,20 @@
 // Backend Configuration
 
 import dotenv from 'dotenv';
+import path from 'path';
 
-dotenv.config();
+// Try .env in current directory first, then parent directory (repo root)
+let envPath = path.resolve(process.cwd(), '.env');
+let result = dotenv.config({ path: envPath });
+
+if (result.error && (result.error as any).code === 'ENOENT') {
+  envPath = path.resolve(process.cwd(), '../.env');
+  result = dotenv.config({ path: envPath });
+}
+
+console.log('[CONFIG] Loading .env from:', envPath);
+console.log('[CONFIG] Dotenv result:', result.error ? result.error.message : 'loaded successfully');
+console.log('[CONFIG] MONGODB_URI env var:', process.env.MONGODB_URI ? 'SET (' + process.env.MONGODB_URI.substring(0, 50) + '...)' : 'NOT SET');
 
 export const config = {
   // Server
@@ -19,22 +31,24 @@ export const config = {
 
   // Databases
   mongodb: {
-    uri: process.env.MONGODB_URI || 'mongodb://localhost:27017/fintrace',
+    uri:
+      process.env.MONGODB_URI ||
+      'mongodb://admin:admin123@127.0.0.1:27017/fintrace?authSource=admin',
   },
 
   neo4j: {
-    uri: process.env.NEO4J_URI || 'bolt://localhost:7687',
+    uri: process.env.NEO4J_URI || 'bolt://127.0.0.1:7687',
     user: process.env.NEO4J_USER || 'neo4j',
     password: process.env.NEO4J_PASSWORD || 'password',
   },
 
   redis: {
-    url: process.env.REDIS_URL || 'redis://localhost:6379',
+    url: process.env.REDIS_URL || 'redis://:redis123@127.0.0.1:6379',
   },
 
   // ML Service
   ml: {
-    serviceUrl: process.env.ML_SERVICE_URL || 'http://localhost:8000',
+    serviceUrl: process.env.ML_SERVICE_URL || 'http://127.0.0.1:8000',
     anomalyThreshold: parseFloat(process.env.ANOMALY_THRESHOLD || '0.7'),
   },
 
