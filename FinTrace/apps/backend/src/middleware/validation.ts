@@ -25,12 +25,12 @@ export function validateRequest(schema: Joi.Schema) {
 // Common validation schemas
 export const schemas = {
   login: Joi.object({
-    email: Joi.string().email().required(),
+    email: Joi.string().trim().lowercase().email().required(),
     password: Joi.string().min(6).required(),
   }),
 
   register: Joi.object({
-    email: Joi.string().email().required(),
+    email: Joi.string().trim().lowercase().email().required(),
     fullName: Joi.string().min(2).required(),
     password: Joi.string().min(6).required(),
   }),

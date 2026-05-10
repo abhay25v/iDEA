@@ -9,6 +9,29 @@ import { AuthPayload, AuthTokens, User } from '@shared/types';
 import { parseDuration } from '@utils';
 
 export class AuthService {
+  private normalizeEmail(email: string): string {
+    return email.trim().toLowerCase();
+  }
+
+  private async verifyAndMigratePassword(user: any, password: string): Promise<boolean> {
+    const storedPassword = typeof user.password === 'string' ? user.password : '';
+
+    // Normal path: stored password is already a bcrypt hash.
+    if (storedPassword.startsWith('$2a$') || storedPassword.startsWith('$2b$') || storedPassword.startsWith('$2y$')) {
+      return bcryptjs.compare(password, storedPassword);
+    }
+
+    // Backward compatibility: accept legacy plain-text passwords once, then upgrade in-place.
+    if (storedPassword && storedPassword === password) {
+      user.password = await bcryptjs.hash(password, 10);
+      await user.save();
+      logger.warn(`Upgraded legacy plain-text password for user: ${user.email}`);
+      return true;
+    }
+
+    return false;
+  }
+
   /**
    * Register a new user
    */
@@ -18,8 +41,10 @@ export class AuthService {
     password: string,
     role: string = 'investigator'
   ): Promise<User> {
+    const normalizedEmail = this.normalizeEmail(email);
+
     // Check if user exists
-    const existingUser = await UserModel.findOne({ email });
+    const existingUser = await UserModel.findOne({ email: normalizedEmail });
     if (existingUser) {
       throw new Error('User already exists');
     }
@@ -29,7 +54,7 @@ export class AuthService {
 
     // Create user
     const user = new UserModel({
-      email,
+      email: normalizedEmail,
       fullName,
       password: hashedPassword,
       role,
@@ -45,14 +70,16 @@ export class AuthService {
    * Login user
    */
   async login(email: string, password: string): Promise<{ user: User; tokens: AuthTokens }> {
+    const normalizedEmail = this.normalizeEmail(email);
+
     // Find user
-    const user: any = await UserModel.findOne({ email });
+    const user: any = await UserModel.findOne({ email: normalizedEmail });
     if (!user) {
       throw new Error('Invalid email or password');
     }
 
     // Verify password
-    const isPasswordValid = await bcryptjs.compare(password, user.password);
+    const isPasswordValid = await this.verifyAndMigratePassword(user, password);
     if (!isPasswordValid) {
       throw new Error('Invalid email or password');
     }

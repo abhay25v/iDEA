@@ -1,11 +1,15 @@
 // MongoDB Seeding Script
 
 import 'dotenv/config';
+import dotenv from 'dotenv';
+import path from 'path';
 import mongoose from 'mongoose';
 import { UserModel, CustomerModel, AccountModel, TransactionModel, AlertModel } from '@models/mongodb';
 import { sampleCustomers, sampleAccounts, sampleTransactions, sampleAlerts } from '../../../data/sample/transactions';
 import bcryptjs from 'bcryptjs';
 import logger from '@utils/logger';
+
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 async function seedDatabase() {
   try {

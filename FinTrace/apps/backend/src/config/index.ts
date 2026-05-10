@@ -1,20 +1,8 @@
-// Backend Configuration
+﻿// Backend Configuration
 
 import dotenv from 'dotenv';
-import path from 'path';
 
-// Try .env in current directory first, then parent directory (repo root)
-let envPath = path.resolve(process.cwd(), '.env');
-let result = dotenv.config({ path: envPath });
-
-if (result.error && (result.error as any).code === 'ENOENT') {
-  envPath = path.resolve(process.cwd(), '../.env');
-  result = dotenv.config({ path: envPath });
-}
-
-console.log('[CONFIG] Loading .env from:', envPath);
-console.log('[CONFIG] Dotenv result:', result.error ? result.error.message : 'loaded successfully');
-console.log('[CONFIG] MONGODB_URI env var:', process.env.MONGODB_URI ? 'SET (' + process.env.MONGODB_URI.substring(0, 50) + '...)' : 'NOT SET');
+dotenv.config();
 
 export const config = {
   // Server
@@ -31,9 +19,7 @@ export const config = {
 
   // Databases
   mongodb: {
-    uri:
-      process.env.MONGODB_URI ||
-      'mongodb://admin:admin123@127.0.0.1:27017/fintrace?authSource=admin',
+    uri: process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/fintrace',
   },
 
   neo4j: {
@@ -43,12 +29,12 @@ export const config = {
   },
 
   redis: {
-    url: process.env.REDIS_URL || 'redis://:redis123@127.0.0.1:6379',
+    url: process.env.REDIS_URL || 'redis://127.0.0.1:6379',
   },
 
   // ML Service
   ml: {
-    serviceUrl: process.env.ML_SERVICE_URL || 'http://127.0.0.1:8000',
+    serviceUrl: process.env.ML_SERVICE_URL || 'http://localhost:8000',
     anomalyThreshold: parseFloat(process.env.ANOMALY_THRESHOLD || '0.7'),
   },
 

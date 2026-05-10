@@ -1,10 +1,4 @@
-// Application Entry Point
-
-// Load environment variables FIRST before any other imports
-import dotenv from 'dotenv';
-import path from 'path';
-
-dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+﻿// Application Entry Point
 
 import app, { initializeServer } from './app';
 

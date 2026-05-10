@@ -1,4 +1,7 @@
 const path = require('path');
+require(path.resolve(__dirname, '../apps/backend/node_modules/dotenv')).config({
+  path: path.resolve(__dirname, '../.env'),
+});
 const bcrypt = require(path.resolve(__dirname, '../apps/backend/node_modules/bcryptjs'));
 const mongoose = require(path.resolve(__dirname, '../apps/backend/node_modules/mongoose'));
 
