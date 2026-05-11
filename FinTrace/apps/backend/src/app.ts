@@ -17,6 +17,7 @@ import { errorHandler } from '@middleware/errors';
 import healthRoutes from '@routes/health.routes';
 import authRoutes from '@routes/auth.routes';
 import transactionRoutes from '@routes/transaction.routes';
+import alertRoutes from '@routes/alert.routes';
 
 const app: any = express();
 
@@ -58,6 +59,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/api/health', healthRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/transactions', transactionRoutes);
+app.use('/api/alerts', alertRoutes);
 
 // 404 Handler
 app.use((req: Request, res: Response) => {

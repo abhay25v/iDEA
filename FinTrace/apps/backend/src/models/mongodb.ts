@@ -107,8 +107,10 @@ const alertSchema = new Schema<any>(
     transactionIds: [String],
     fraudScore: { type: Number, required: true, min: 0, max: 1 },
     investigatorId: String,
+    dismissedBy: String,
     notes: String,
     tags: [String],
+    reviewedAt: Date,
     resolvedAt: Date,
   },
   { timestamps: true }

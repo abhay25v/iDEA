@@ -1,8 +1,16 @@
 ﻿// Backend Configuration
 
 import dotenv from 'dotenv';
+import path from 'path';
+import fs from 'fs';
 
-dotenv.config();
+// Prefer loading the repository root .env when running from subfolders (dev)
+const rootEnv = path.resolve(__dirname, '../../../.env');
+if (fs.existsSync(rootEnv)) {
+  dotenv.config({ path: rootEnv });
+} else {
+  dotenv.config();
+}
 
 export const config = {
   // Server
