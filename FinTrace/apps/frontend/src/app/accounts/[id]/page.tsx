@@ -4,7 +4,7 @@
 
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter, useParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { NavBar, Card, CardHeader, CardTitle, CardContent, Button } from '@/components';
 import apiClient from '@/lib/api';
 
@@ -50,15 +50,7 @@ export default function AccountInspectionPage() {
     }
   }, [user, loading, router]);
 
-  useEffect(() => {
-    if (!mounted || loading || !user || !accountId) {
-      return;
-    }
-
-    void fetchAccountData();
-  }, [mounted, loading, user, accountId]);
-
-  const fetchAccountData = async () => {
+  const fetchAccountData = useCallback(async () => {
     try {
       setLoadingData(true);
 
@@ -79,7 +71,15 @@ export default function AccountInspectionPage() {
     } finally {
       setLoadingData(false);
     }
-  };
+  }, [accountId]);
+
+  useEffect(() => {
+    if (!mounted || loading || !user || !accountId) {
+      return;
+    }
+
+    void fetchAccountData();
+  }, [mounted, loading, user, accountId, fetchAccountData]);
 
   if (!mounted || loading || !user) {
     return (

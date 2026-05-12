@@ -4,7 +4,7 @@
 
 import { useAuth } from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { NavBar, Card, CardHeader, CardTitle, CardContent, StatCard, Button } from '@/components';
 import Link from 'next/link';
 
@@ -57,15 +57,7 @@ export default function DashboardPage() {
     }
   }, [user, loading, router]);
 
-  useEffect(() => {
-    if (!mounted || loading || !user) {
-      return;
-    }
-
-    void runAssessment(defaultAssessmentForm);
-  }, [mounted, loading, user]);
-
-  const runAssessment = async (form: AssessmentForm = assessmentForm) => {
+  const runAssessment = useCallback(async (form: AssessmentForm) => {
     try {
       setPredicting(true);
       setPredictionError(null);
@@ -101,7 +93,15 @@ export default function DashboardPage() {
     } finally {
       setPredicting(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (!mounted || loading || !user) {
+      return;
+    }
+
+    void runAssessment(defaultAssessmentForm);
+  }, [mounted, loading, user, runAssessment]);
 
   const loadScenario = (scenario: 'normal' | 'high-risk') => {
     const nextForm =
@@ -151,7 +151,7 @@ export default function DashboardPage() {
         {/* Welcome Section */}
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-white mb-2">Welcome back, {user.fullName}!</h2>
-          <p className="text-slate-400">Here's your fraud detection overview for today.</p>
+          <p className="text-slate-400">Here&apos;s your fraud detection overview for today.</p>
         </div>
 
         {/* Stats Grid */}
@@ -184,7 +184,7 @@ export default function DashboardPage() {
                 <Button variant="secondary" size="sm" onClick={() => loadScenario('high-risk')} disabled={predicting}>
                   Load high-risk case
                 </Button>
-                <Button variant="primary" size="sm" onClick={() => void runAssessment()} disabled={predicting}>
+                <Button variant="primary" size="sm" onClick={() => void runAssessment(assessmentForm)} disabled={predicting}>
                   {predicting ? 'Analyzing...' : 'Run assessment'}
                 </Button>
               </div>
