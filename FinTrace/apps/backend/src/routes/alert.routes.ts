@@ -1,10 +1,10 @@
 // Alert Routes
 
-import { Router } from 'express';
+import { Router, Request, Response } from 'express';
 import alertController from '@controllers/alert.controller';
 import { authenticateToken, authorize } from '@middleware/auth';
 
-const router = Router();
+const router: Router = Router();
 
 // All routes require authentication
 router.use(authenticateToken);

@@ -1,66 +1,49 @@
-# FinTrace - AI-Powered Banking Fraud Detection Platform
+# FinTrace - Banking Fraud Detection Platform
 
-A production-grade fraud detection system that tracks movement of funds across accounts and detects suspicious transaction patterns using graph analytics and machine learning.
+A comprehensive fraud detection system for tracking suspicious transaction patterns, visualizing account networks, and generating compliance reports.
 
 ## 🎯 Features
 
 ### Core Capabilities
-- **Transaction Ingestion Pipeline** - Real-time transaction import and normalization
-- **Graph Relationship Mapping** - Account networks visualized using Neo4j
-- **Fraud Topology Detection** - Identify circular transfers, layering, smurfing
-- **ML Anomaly Detection** - Isolation Forest + Random Forest models
-- **Real-time Alerts** - WebSocket-based live notification system
-- **FIU Evidence Export** - Downloadable PDF reports with transaction chains
-- **Risk Scoring Engine** - Multi-factor fraud probability calculation
-- **KYC Profile Mismatch** - Behavioral deviation detection
+- **Transaction Analytics** - Comprehensive transaction tracking and trend analysis
+- **Graph Visualization** - Interactive account networks via Neo4j
+- **Real-time Risk Scoring** - ML-based fraud probability assessment
+- **FIU Evidence Export** - Downloadable PDF reports with transaction evidence
+- **Alert Management** - Centralized fraud alert handling and investigation
+- **Account Inspection** - Deep-dive account analysis with full transaction history
+- **Reports & Analytics** - Dashboard with fraud metrics, trends, and risk distribution
+- **Role-Based Access** - Admin, Investigator, Auditor roles with RBAC
 - **Audit Logging** - Complete investigation trail tracking
-
-### Fraud Patterns Detected
-- ✅ Rapid layering schemes
-- ✅ Circular fund transfers
-- ✅ Round-tripping transactions
-- ✅ Smurfing/structuring activities
-- ✅ Dormant account activation
-- ✅ High-frequency transfer chains
-- ✅ KYC-income mismatches
-- ✅ Money mule networks
-- ✅ Geographic anomalies
-- ✅ Device mismatch patterns
 
 ## 🏗️ Tech Stack
 
 ### Frontend
 - **Next.js 15** with App Router
-- **TypeScript** for type safety
-- **TailwindCSS** + **shadcn/ui** for modern UI
-- **React Flow / Cytoscape.js** for graph visualization
-- **Recharts** for analytics dashboards
-- **WebSocket** for real-time updates
+- **React 18** + **TypeScript**
+- **TailwindCSS** for styling
+- **SVG graphs** for network visualization
+- **Axios** for API calls
 
 ### Backend
-- **Node.js** + **Express**
-- **TypeScript** with strict mode
+- **Node.js** + **Express.js**
+- **TypeScript** with strict type checking
+- **Mongoose** ODM for MongoDB
 - **JWT** authentication + **RBAC**
-- **Helmet** for security headers
-- **Rate limiting** middleware
-- **Request validation** schemas
+- **PDFKit** for PDF generation
 
 ### Databases
-- **MongoDB** - Transaction records, alerts, logs
-- **Neo4j** - Account relationships and fund movements
-- **Redis** - Caching and real-time features
+- **MongoDB 7.0** - Transactions, accounts, alerts
+- **Neo4j 5.12** - Account relationship graphs
+- **Redis 7.2** - Caching layer
 
 ### ML Service
-- **FastAPI** with Python 3.10+
-- **Scikit-learn** - Isolation Forest, Random Forest
-- **Pandas** - Feature engineering
-- **NumPy** - Numerical computation
+- **FastAPI** with Python 3.12
+- **Heuristic-based** fraud scoring
+- **Custom feature engineering**
 
 ### Deployment
 - **Docker** containers
-- **Docker Compose** orchestration
-- **MongoDB Atlas ready**
-- **Neo4j AuraDB ready**
+- **Docker Compose** for local development
 
 ## 📁 Project Structure
 

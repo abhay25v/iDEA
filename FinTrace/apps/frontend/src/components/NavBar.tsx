@@ -37,6 +37,18 @@ export const NavBar: React.FC<NavBarProps> = ({ title = 'FinTrace', showNav = tr
             <Link href="/transactions" className="text-slate-300 hover:text-white transition-colors">
               Transactions
             </Link>
+            <Link href="/reports" className="text-slate-300 hover:text-white transition-colors">
+              Reports
+            </Link>
+            <Link href="/graph" className="text-slate-300 hover:text-white transition-colors">
+              Graph
+            </Link>
+            <Link href="/fiu-export" className="text-slate-300 hover:text-white transition-colors">
+              Export
+            </Link>
+            <Link href="/settings" className="text-slate-300 hover:text-white transition-colors">
+              Settings
+            </Link>
             <Button variant="ghost" size="sm" onClick={handleLogout}>
               Logout
             </Button>

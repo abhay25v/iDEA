@@ -1,75 +1,25 @@
-// Quick Start Guide
+# Quick Start Guide
 
-## 🚀 5-Minute Quick Start
+## 🚀 Getting Started
 
-### Option 1: Docker Compose (Recommended)
+### Docker Compose (Recommended)
 
 ```bash
-# 1. Clone and enter directory
+# Start all services
 cd FinTrace
-
-# 2. Setup environment
-cp .env.example .env
-
-# 3. Start all services
 docker-compose up -d
 
-# 4. Check status
+# Check status
 docker-compose ps
 
-# 5. Access services
-# Frontend: http://localhost:3000
-# API: http://localhost:5000
-# ML Service: http://localhost:8000
-# Neo4j: http://localhost:7474
-```
-
-**Login with**:
-- Email: `admin@fintrace.io`
-- Password: `AdminPass123!`
-
-### Option 2: Local Development
-
-```bash
-# Backend
-cd apps/backend && npm install && npm run dev
-
-# Frontend (in new terminal)
-cd apps/frontend && npm install && npm run dev
-
-# ML Service (in new terminal)
-cd apps/ml-service
-py -3.12 -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-
 # Access
-# Frontend: http://localhost:3000
-# API: http://localhost:5000
-# ML: http://localhost:8000
+Frontend:    http://localhost:3000
+Backend API: http://localhost:5000
+ML Service:  http://localhost:8000
+Neo4j:       http://localhost:7474
 ```
 
-## 📊 Database Setup
-
-### MongoDB (Docker)
-```bash
-docker run -d -p 27017:27017 \
-  -e MONGO_INITDB_ROOT_USERNAME=admin \
-  -e MONGO_INITDB_ROOT_PASSWORD=admin123 \
-  mongo:7.0
-```
-
-### Neo4j (Docker)
-```bash
-docker run -d -p 7474:7474 -p 7687:7687 \
-  -e NEO4J_AUTH=neo4j/password \
-  neo4j:5.12
-```
-
-### Redis (Docker)
-```bash
-docker run -d -p 6379:6379 redis:7.2-alpine
-```
-
-## 🔑 Default Credentials
+### Login Credentials
 
 | Role | Email | Password |
 |------|-------|----------|
@@ -77,22 +27,29 @@ docker run -d -p 6379:6379 redis:7.2-alpine
 | Investigator | investigator@fintrace.io | InvestigatorPass123! |
 | Auditor | auditor@fintrace.io | AuditorPass123! |
 
-## 📁 Project Structure
+### Local Development
 
-```
-FinTrace/
-├── apps/frontend/         # Next.js 15 React app
-├── apps/backend/          # Express API server
-├── apps/ml-service/       # FastAPI ML microservice
-├── packages/shared/       # Shared TypeScript types
-├── data/sample/           # Sample transaction data
-├── scripts/               # Database seeding scripts
-├── docs/                  # Documentation
-├── docker-compose.yml     # Service orchestration
-└── README.md              # Full documentation
+```bash
+# Terminal 1: Backend
+cd apps/backend
+npm install
+npm run dev
+
+# Terminal 2: Frontend
+cd apps/frontend
+npm install
+npm run dev
+
+# Terminal 3: ML Service (optional)
+cd apps/ml-service
+python -m venv venv
+.\venv\Scripts\activate  # Windows
+source venv/bin/activate  # Linux/Mac
+pip install -r requirements.txt
+uvicorn app.main:app --reload --port 8000
 ```
 
-## 🛠️ Common Commands
+## ️ Common Commands
 
 ```bash
 # Start services

@@ -3,9 +3,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useAuth } from '@/hooks/useAuth';
 import apiClient from '@/lib/api';
-import { NavBar, Card, CardContent, Button } from '@/components';
+import { NavBar, Card, CardContent } from '@/components';
 
 interface Alert {
   _id: string;
@@ -21,11 +20,9 @@ interface Alert {
 }
 
 export default function AlertsPage() {
-  const { user } = useAuth();
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
-  const [actionInProgress, setActionInProgress] = useState<string | null>(null);
 
   useEffect(() => {
     fetchAlerts();
@@ -43,35 +40,7 @@ export default function AlertsPage() {
     }
   };
 
-  const handleReview = async (alertId: string) => {
-    try {
-      setActionInProgress(alertId);
-      await apiClient.patch(`/alerts/${alertId}/review`, {});
-      await fetchAlerts();
-    } catch (error) {
-      console.error('Failed to review alert:', error);
-      alert('Failed to review alert');
-    } finally {
-      setActionInProgress(null);
-    }
-  };
-
-  const handleDismiss = async (alertId: string) => {
-    try {
-      if (!confirm('Are you sure you want to dismiss this alert?')) return;
-      setActionInProgress(alertId);
-      await apiClient.patch(`/alerts/${alertId}/dismiss`, {});
-      await fetchAlerts();
-    } catch (error) {
-      console.error('Failed to dismiss alert:', error);
-      alert('Failed to dismiss alert');
-    } finally {
-      setActionInProgress(null);
-    }
-  };
-
   const filteredAlerts = filter === 'all' ? alerts : alerts.filter(a => a.status === filter);
-  const canModifyAlerts = user?.role === 'admin' || user?.role === 'investigator';
 
   const getSeverityColor = (severity: string) => {
     switch (severity) {
@@ -93,12 +62,10 @@ export default function AlertsPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <h2 className="text-3xl font-bold text-white mb-2">Fraud Alerts</h2>
-          <p className="text-slate-400">Monitor and manage suspicious transaction alerts in real-time.</p>
-          {user?.role === 'auditor' && (
-            <p className="text-slate-500 text-sm mt-2">
-              📋 Auditor mode: Read-only access. Contact an investigator to review or dismiss alerts.
-            </p>
-          )}
+          <p className="text-slate-400">Monitor suspicious transaction alerts in real-time.</p>
+          <p className="text-slate-500 text-sm mt-2">
+            Review and model analysis now live on the dashboard ML panel.
+          </p>
         </div>
 
         <div className="flex gap-2 mb-6 border-b border-slate-700">
@@ -167,26 +134,6 @@ export default function AlertsPage() {
                         )}
                       </div>
                     </div>
-                    {canModifyAlerts && (
-                      <div className="flex flex-col gap-2">
-                        <Button
-                          variant="primary"
-                          size="sm"
-                          onClick={() => handleReview(alert._id)}
-                          disabled={actionInProgress === alert._id || alert.status !== 'open'}
-                        >
-                          {actionInProgress === alert._id ? 'Loading...' : 'Review'}
-                        </Button>
-                        <Button
-                          variant="secondary"
-                          size="sm"
-                          onClick={() => handleDismiss(alert._id)}
-                          disabled={actionInProgress === alert._id || alert.status !== 'open'}
-                        >
-                          {actionInProgress === alert._id ? 'Loading...' : 'Dismiss'}
-                        </Button>
-                      </div>
-                    )}
                   </div>
                 </CardContent>
               </Card>

@@ -18,6 +18,9 @@ import healthRoutes from '@routes/health.routes';
 import authRoutes from '@routes/auth.routes';
 import transactionRoutes from '@routes/transaction.routes';
 import alertRoutes from '@routes/alert.routes';
+import analyticsRoutes from '@routes/analytics.routes';
+import exportRoutes from '@routes/export.routes';
+import graphRoutes from '@routes/graph.routes';
 
 const app: any = express();
 
@@ -60,6 +63,9 @@ app.use('/api/health', healthRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/alerts', alertRoutes);
+app.use('/api/analytics', analyticsRoutes);
+app.use('/api/export', exportRoutes);
+app.use('/api/graph', graphRoutes);
 
 // 404 Handler
 app.use((req: Request, res: Response) => {
