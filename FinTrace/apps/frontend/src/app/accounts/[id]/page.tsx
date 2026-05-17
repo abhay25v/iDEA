@@ -83,17 +83,17 @@ export default function AccountInspectionPage() {
 
   if (!mounted || loading || !user) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-500 mb-4"></div>
-          <p className="text-slate-400">Loading...</p>
+          <p className="text-slate-600">Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-50">
       <NavBar showNav title="FinTrace" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -101,8 +101,8 @@ export default function AccountInspectionPage() {
           <Button variant="secondary" onClick={() => router.back()} className="mb-4">
             ← Back
           </Button>
-          <h2 className="text-3xl font-bold text-white mb-2">Account Inspection</h2>
-          <p className="text-slate-400">Detailed view of account information and transaction history.</p>
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">Account Inspection</h2>
+          <p className="text-slate-600">Detailed view of account information and transaction history.</p>
         </div>
 
         {loadingData ? (
@@ -119,20 +119,20 @@ export default function AccountInspectionPage() {
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   <div>
-                    <p className="text-slate-400 text-sm mb-1">Account ID</p>
-                    <p className="text-lg text-white font-semibold">{account.accountId}</p>
+                    <p className="text-slate-500 text-sm mb-1">Account ID</p>
+                    <p className="text-lg text-slate-900 font-semibold">{account.accountId}</p>
                   </div>
                   <div>
-                    <p className="text-slate-400 text-sm mb-1">Account Holder</p>
-                    <p className="text-lg text-white font-semibold">{account.accountHolder}</p>
+                    <p className="text-slate-500 text-sm mb-1">Account Holder</p>
+                    <p className="text-lg text-slate-900 font-semibold">{account.accountHolder}</p>
                   </div>
                   <div>
-                    <p className="text-slate-400 text-sm mb-1">Account Number</p>
-                    <p className="text-lg text-white font-semibold">****{account.accountNumber?.slice(-4)}</p>
+                    <p className="text-slate-500 text-sm mb-1">Account Number</p>
+                    <p className="text-lg text-slate-900 font-semibold">****{account.accountNumber?.slice(-4)}</p>
                   </div>
                   <div>
-                    <p className="text-slate-400 text-sm mb-1">Balance</p>
-                    <p className="text-lg text-white font-semibold">${(account.balance || 0).toLocaleString()}</p>
+                    <p className="text-slate-500 text-sm mb-1">Balance</p>
+                    <p className="text-lg text-slate-900 font-semibold">${(account.balance || 0).toLocaleString()}</p>
                   </div>
                   <div>
                     <p className="text-slate-400 text-sm mb-1">Status</p>
@@ -183,14 +183,14 @@ export default function AccountInspectionPage() {
                     {transactions.slice(0, 10).map((txn) => (
                       <div key={txn._id} className="flex items-center justify-between p-3 bg-slate-800/50 rounded-lg border border-slate-700">
                         <div className="flex-1">
-                          <p className="text-white font-medium">{txn.type}</p>
-                          <p className="text-sm text-slate-400">
-                            {txn.sourceAccountId} → {txn.destinationAccountId}
-                          </p>
+                              <p className="text-slate-900 font-medium">{txn.type}</p>
+                              <p className="text-sm text-slate-600">
+                                {txn.sourceAccountId} → {txn.destinationAccountId}
+                              </p>
                         </div>
                         <div className="text-right">
-                          <p className="text-white font-semibold">${txn.amount.toLocaleString()}</p>
-                          <p className="text-sm text-slate-400">{new Date(txn.timestamp).toLocaleDateString()}</p>
+                              <p className="text-slate-900 font-semibold">${txn.amount.toLocaleString()}</p>
+                              <p className="text-sm text-slate-600">{new Date(txn.timestamp).toLocaleDateString()}</p>
                         </div>
                       </div>
                     ))}

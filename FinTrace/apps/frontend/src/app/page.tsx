@@ -7,11 +7,11 @@ import { Button } from '@/components';
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-cyan-900 to-emerald-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       {/* Navigation */}
-      <nav className="bg-slate-900/50 backdrop-blur border-b border-slate-700 sticky top-0 z-40">
+      <nav className="bg-white/95 backdrop-blur border-b border-slate-200 sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-emerald-400">
+          <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
             FinTrace
           </h1>
           <Link href="/login">
@@ -24,10 +24,10 @@ export default function HomePage() {
 
       {/* Hero */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
-        <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
+        <h2 className="text-5xl md:text-6xl font-bold text-slate-900 mb-6">
           AI-Powered Banking Fraud Detection
         </h2>
-        <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+        <p className="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
           FinTrace uses advanced machine learning and graph analytics to detect suspicious transaction patterns and protect your banking network.
         </p>
         <div className="flex gap-4 justify-center flex-wrap">
@@ -46,7 +46,7 @@ export default function HomePage() {
 
       {/* Features */}
       <div id="features" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <h3 className="text-3xl font-bold text-white text-center mb-12">Key Features</h3>
+        <h3 className="text-3xl font-bold text-slate-900 text-center mb-12">Key Features</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             { title: 'Real-time Monitoring', description: 'Monitor transactions in real-time' },
@@ -56,17 +56,17 @@ export default function HomePage() {
             { title: 'Alert Management', description: 'Intelligent alert triage and routing' },
             { title: 'Evidence Export', description: 'Generate FIU-compliant reports' },
           ].map((feature, i) => (
-            <div key={i} className="bg-slate-800 border border-slate-700 rounded-lg p-6 hover:border-cyan-500 transition">
-              <h4 className="text-lg font-semibold text-white mb-2">{feature.title}</h4>
-              <p className="text-slate-400">{feature.description}</p>
+            <div key={i} className="bg-white border border-slate-200 rounded-lg p-6 hover:border-cyan-500 transition shadow-sm">
+              <h4 className="text-lg font-semibold text-slate-900 mb-2">{feature.title}</h4>
+              <p className="text-slate-600">{feature.description}</p>
             </div>
           ))}
         </div>
       </div>
 
       {/* Footer */}
-      <div className="border-t border-slate-800 bg-slate-900/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-slate-400">
+      <div className="border-t border-slate-200 bg-white/95">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center text-slate-600">
           <p>&copy; 2024 FinTrace. All rights reserved.</p>
         </div>
       </div>

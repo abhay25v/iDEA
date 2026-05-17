@@ -107,19 +107,19 @@ export default function TransactionsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-50">
       <NavBar showNav title="FinTrace" />
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Page Header */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-white mb-2">Transaction History</h2>
-          <p className="text-slate-400">Monitor all transactions in real-time with fraud detection.</p>
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">Transaction History</h2>
+          <p className="text-slate-600">Monitor all transactions in real-time with fraud detection.</p>
         </div>
 
         {/* Search Bar */}
-        <Card className="mb-6">
+          <Card className="mb-6">
           <CardContent>
             <div className="relative">
               <Search className="absolute left-3 top-3 text-slate-400" size={20} />
@@ -128,7 +128,7 @@ export default function TransactionsPage() {
                 placeholder="Search by Transaction ID, Account ID..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+                className="w-full pl-10 pr-4 py-2 bg-white border border-slate-300 rounded-lg text-slate-900 placeholder-slate-400 focus:outline-none focus:border-cyan-500"
               />
             </div>
           </CardContent>
@@ -155,23 +155,23 @@ export default function TransactionsPage() {
                 </thead>
                 <tbody>
                   {filteredTransactions.map((txn) => (
-                    <tr key={txn.id} className="border-b border-slate-700/50 hover:bg-slate-800/50 transition">
-                      <td className="py-3 px-4">
-                        <span className="text-lg">{getTypeIcon(txn.type)}</span>
-                      </td>
-                      <td className="py-3 px-4">
-                        <span className="text-white font-mono text-sm">{txn.id}</span>
-                        <p className="text-slate-500 text-xs">{txn.description}</p>
-                      </td>
-                      <td className="py-3 px-4">
-                        <span className="text-slate-300 text-sm">{txn.sourceAccountId}</span>
-                      </td>
-                      <td className="py-3 px-4">
-                        <span className="text-slate-300 text-sm">{txn.destinationAccountId}</span>
-                      </td>
-                      <td className="py-3 px-4 text-right">
-                        <span className="text-white font-semibold">${txn.amount.toLocaleString()}</span>
-                      </td>
+                    <tr key={txn.id} className="border-b border-slate-200/80 hover:bg-slate-50 transition">
+                          <td className="py-3 px-4">
+                            <span className="text-lg">{getTypeIcon(txn.type)}</span>
+                          </td>
+                          <td className="py-3 px-4">
+                            <span className="text-slate-900 font-mono text-sm">{txn.id}</span>
+                            <p className="text-slate-500 text-xs">{txn.description}</p>
+                          </td>
+                          <td className="py-3 px-4">
+                            <span className="text-slate-700 text-sm">{txn.sourceAccountId}</span>
+                          </td>
+                          <td className="py-3 px-4">
+                            <span className="text-slate-700 text-sm">{txn.destinationAccountId}</span>
+                          </td>
+                          <td className="py-3 px-4 text-right">
+                            <span className="text-slate-900 font-semibold">${txn.amount.toLocaleString()}</span>
+                          </td>
                       <td className="py-3 px-4">
                         <span className={`inline-block px-2.5 py-1 text-xs rounded-full font-medium border ${getStatusColor(txn.status)}`}>
                           {txn.status.charAt(0).toUpperCase() + txn.status.slice(1)}

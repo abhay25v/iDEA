@@ -35,37 +35,37 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-cyan-900 to-emerald-900 flex items-center justify-center">
-      <div className="w-full max-w-md p-8 bg-slate-800 rounded-lg shadow-2xl border border-slate-700">
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-2xl border border-slate-200">
         {/* Logo/Header */}
         <div className="mb-8 text-center">
           <h1 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-emerald-400">
             FinTrace
           </h1>
-          <p className="text-slate-400 mt-2">Banking Fraud Detection</p>
+          <p className="text-slate-600 mt-2">Banking Fraud Detection</p>
         </div>
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Email</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-cyan-500"
+              className="w-full px-4 py-2 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500"
               placeholder="admin@fintrace.io"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-300 mb-1">Password</label>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white focus:outline-none focus:border-cyan-500"
+              className="w-full px-4 py-2 bg-white border border-slate-300 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500"
               placeholder="••••••••"
               required
             />
@@ -87,10 +87,10 @@ export default function LoginPage() {
         </form>
 
         {/* Demo Credentials */}
-        <div className="mt-6 p-4 bg-slate-700/50 rounded-lg border border-slate-600">
-          <p className="text-xs font-semibold text-slate-300 mb-2">Demo Credentials:</p>
-          <p className="text-xs text-slate-400">Email: admin@fintrace.io</p>
-          <p className="text-xs text-slate-400">Password: AdminPass123!</p>
+          <div className="mt-6 p-4 bg-slate-50 rounded-lg border border-slate-200">
+          <p className="text-xs font-semibold text-slate-700 mb-2">Demo Credentials:</p>
+          <p className="text-xs text-slate-600">Email: admin@fintrace.io</p>
+          <p className="text-xs text-slate-600">Password: AdminPass123!</p>
         </div>
       </div>
     </div>

@@ -35,10 +35,10 @@ interface PredictionResult {
 type AssessmentForm = typeof defaultAssessmentForm;
 
 const riskBadgeClasses: Record<string, string> = {
-  critical: 'bg-red-500/20 text-red-300 border-red-500/30',
-  high: 'bg-orange-500/20 text-orange-300 border-orange-500/30',
-  medium: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30',
-  low: 'bg-green-500/20 text-green-300 border-green-500/30',
+  critical: 'bg-red-100 text-red-700 border-red-300',
+  high: 'bg-orange-100 text-orange-700 border-orange-300',
+  medium: 'bg-yellow-100 text-yellow-700 border-yellow-300',
+  low: 'bg-green-100 text-green-700 border-green-300',
 };
 
 export default function DashboardPage() {
@@ -133,25 +133,25 @@ export default function DashboardPage() {
 
   if (!mounted || loading || !user) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-500 mb-4"></div>
-          <p className="text-slate-400">Loading...</p>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
+          <p className="text-slate-600">Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
       <NavBar showNav title="FinTrace" />
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Welcome Section */}
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-white mb-2">Welcome back, {user.fullName}!</h2>
-          <p className="text-slate-400">Here&apos;s your fraud detection overview for today.</p>
+        <div className="mb-12">
+          <h2 className="text-4xl font-bold text-slate-900 mb-2">Welcome back, {user.fullName}!</h2>
+          <p className="text-slate-600 text-lg">Monitor fraud detection metrics and manage your security in real-time.</p>
         </div>
 
         {/* Stats Grid */}
@@ -168,13 +168,13 @@ export default function DashboardPage() {
         </div>
 
         {/* ML Assessment */}
-        <Card className="mb-8 border-cyan-500/20 bg-slate-900/70">
+        <Card className="mb-8 border-blue-200 bg-gradient-to-br from-white via-blue-50 to-indigo-50 shadow-lg">
           <CardHeader>
-            <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               <div>
-                <CardTitle>ML Risk Analyzer</CardTitle>
-                <p className="text-slate-400 text-sm mt-1">
-                  Run the fraud model directly from the dashboard and inspect the live result here.
+                <CardTitle className="text-2xl mb-1">ML Risk Analyzer</CardTitle>
+                <p className="text-slate-600 text-sm font-medium">
+                  Assess transaction risk using advanced machine learning models
                 </p>
               </div>
               <div className="flex gap-2 flex-wrap">
@@ -191,57 +191,58 @@ export default function DashboardPage() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+              <div className="space-y-5">
+                <h4 className="text-sm font-bold text-slate-900 uppercase tracking-wide">Assessment Parameters</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                   <label className="block">
-                    <span className="text-sm text-slate-400 mb-2 block">Account ID</span>
+                    <span className="text-sm font-medium text-slate-700 mb-2 block">Account ID</span>
                     <input
-                      className="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white outline-none focus:border-cyan-500"
+                      className="w-full rounded-lg bg-white border border-slate-300 px-3 py-2 text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       value={assessmentForm.account_id}
                       onChange={(event) => updateField('account_id', event.target.value)}
                     />
                   </label>
                   <label className="block">
-                    <span className="text-sm text-slate-400 mb-2 block">Transaction amount</span>
+                    <span className="text-sm font-medium text-slate-700 mb-2 block">Transaction amount</span>
                     <input
                       type="number"
-                      className="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white outline-none focus:border-cyan-500"
+                      className="w-full rounded-lg bg-white border border-slate-300 px-3 py-2 text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       value={assessmentForm.transaction_amount}
                       onChange={(event) => updateField('transaction_amount', event.target.value)}
                     />
                   </label>
                   <label className="block">
-                    <span className="text-sm text-slate-400 mb-2 block">Transaction frequency</span>
+                    <span className="text-sm font-medium text-slate-700 mb-2 block">Transaction frequency</span>
                     <input
                       type="number"
-                      className="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white outline-none focus:border-cyan-500"
+                      className="w-full rounded-lg bg-white border border-slate-300 px-3 py-2 text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       value={assessmentForm.transaction_frequency}
                       onChange={(event) => updateField('transaction_frequency', event.target.value)}
                     />
                   </label>
                   <label className="block">
-                    <span className="text-sm text-slate-400 mb-2 block">Account age (days)</span>
+                    <span className="text-sm font-medium text-slate-700 mb-2 block">Account age (days)</span>
                     <input
                       type="number"
-                      className="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white outline-none focus:border-cyan-500"
+                      className="w-full rounded-lg bg-white border border-slate-300 px-3 py-2 text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       value={assessmentForm.account_age}
                       onChange={(event) => updateField('account_age', event.target.value)}
                     />
                   </label>
                   <label className="block">
-                    <span className="text-sm text-slate-400 mb-2 block">Transfer velocity</span>
+                    <span className="text-sm font-medium text-slate-700 mb-2 block">Transfer velocity</span>
                     <input
                       type="number"
-                      className="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white outline-none focus:border-cyan-500"
+                      className="w-full rounded-lg bg-white border border-slate-300 px-3 py-2 text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       value={assessmentForm.transfer_velocity}
                       onChange={(event) => updateField('transfer_velocity', event.target.value)}
                     />
                   </label>
                   <label className="block">
-                    <span className="text-sm text-slate-400 mb-2 block">KYC status</span>
+                    <span className="text-sm font-medium text-slate-700 mb-2 block">KYC status</span>
                     <select
-                      className="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white outline-none focus:border-cyan-500"
+                      className="w-full rounded-lg bg-white border border-slate-300 px-3 py-2 text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                       value={assessmentForm.account_kyc_status}
                       onChange={(event) => updateField('account_kyc_status', event.target.value)}
                     >
@@ -253,7 +254,7 @@ export default function DashboardPage() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                  <label className="flex items-center gap-3 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200">
+                  <label className="flex items-center gap-3 rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 cursor-pointer transition">
                     <input
                       type="checkbox"
                       checked={assessmentForm.geographic_deviation}
@@ -261,7 +262,7 @@ export default function DashboardPage() {
                     />
                     Geographic deviation
                   </label>
-                  <label className="flex items-center gap-3 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200">
+                  <label className="flex items-center gap-3 rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 cursor-pointer transition">
                     <input
                       type="checkbox"
                       checked={assessmentForm.device_mismatch}
@@ -269,7 +270,7 @@ export default function DashboardPage() {
                     />
                     Device mismatch
                   </label>
-                  <label className="flex items-center gap-3 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-200">
+                  <label className="flex items-center gap-3 rounded-lg border border-slate-300 bg-slate-50 px-3 py-2 text-sm text-slate-700 hover:bg-slate-100 cursor-pointer transition">
                     <input
                       type="checkbox"
                       checked={assessmentForm.balance_anomaly}
@@ -280,24 +281,24 @@ export default function DashboardPage() {
                 </div>
 
                 <label className="block">
-                  <span className="text-sm text-slate-400 mb-2 block">Last transaction time</span>
+                  <span className="text-sm font-medium text-slate-700 mb-2 block">Last transaction time</span>
                   <input
                     type="number"
-                    className="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-white outline-none focus:border-cyan-500"
+                    className="w-full rounded-lg bg-white border border-slate-300 px-3 py-2 text-slate-900 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
                     placeholder="Optional UNIX timestamp"
                     value={assessmentForm.last_transaction_time}
                     onChange={(event) => updateField('last_transaction_time', event.target.value)}
                   />
                 </label>
 
-                {predictionError && <p className="text-sm text-red-300">{predictionError}</p>}
+                {predictionError && <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg p-3">{predictionError}</p>}
               </div>
 
-              <div className="rounded-2xl border border-slate-700 bg-slate-950/80 p-5 shadow-lg shadow-cyan-950/10">
-                <div className="flex items-center justify-between gap-3 mb-4">
+              <div className="rounded-2xl border border-blue-300 bg-gradient-to-br from-blue-50 via-white to-indigo-50 p-6 shadow-md">
+                <div className="flex items-center justify-between gap-4 mb-5">
                   <div>
-                    <p className="text-slate-400 text-sm">Model output</p>
-                    <h3 className="text-xl font-semibold text-white">
+                    <p className="text-slate-600 text-sm font-bold uppercase tracking-wide">Model Result</p>
+                    <h3 className="text-2xl font-bold text-slate-900 mt-1">
                       {prediction ? prediction.account_id : 'Waiting for assessment'}
                     </h3>
                   </div>
@@ -312,45 +313,45 @@ export default function DashboardPage() {
                   <div className="space-y-5">
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm text-slate-400">Fraud probability</span>
-                        <span className="text-white font-semibold">{Math.round(prediction.fraud_probability * 100)}%</span>
+                        <span className="text-sm font-medium text-slate-700">Fraud probability</span>
+                        <span className="text-slate-900 font-bold">{Math.round(prediction.fraud_probability * 100)}%</span>
                       </div>
-                      <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
-                        <div className="h-2 rounded-full bg-cyan-500" style={{ width: `${prediction.fraud_probability * 100}%` }} />
+                      <div className="w-full h-3 rounded-full bg-slate-200 overflow-hidden">
+                        <div className="h-3 rounded-full bg-gradient-to-r from-red-500 to-red-600" style={{ width: `${prediction.fraud_probability * 100}%` }} />
                       </div>
                     </div>
 
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-sm text-slate-400">Anomaly score</span>
-                        <span className="text-white font-semibold">{Math.round(prediction.anomaly_score * 100)}%</span>
+                        <span className="text-sm font-medium text-slate-700">Anomaly score</span>
+                        <span className="text-slate-900 font-bold">{Math.round(prediction.anomaly_score * 100)}%</span>
                       </div>
-                      <div className="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
-                        <div className="h-2 rounded-full bg-emerald-500" style={{ width: `${prediction.anomaly_score * 100}%` }} />
+                      <div className="w-full h-3 rounded-full bg-slate-200 overflow-hidden">
+                        <div className="h-3 rounded-full bg-gradient-to-r from-amber-500 to-amber-600" style={{ width: `${prediction.anomaly_score * 100}%` }} />
                       </div>
                     </div>
 
                     <div>
-                      <p className="text-sm text-slate-400 mb-2">Explanation</p>
-                      <p className="text-slate-100 leading-6">{prediction.explanation}</p>
+                      <p className="text-sm font-medium text-slate-700 mb-2">Explanation</p>
+                      <p className="text-slate-700 leading-6 bg-white/50 p-3 rounded-lg">{prediction.explanation}</p>
                     </div>
 
                     <div>
-                      <p className="text-sm text-slate-400 mb-3">Features sent to the model</p>
+                      <p className="text-sm font-medium text-slate-700 mb-3">Features sent to the model</p>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {Object.entries(prediction.features).map(([label, value]) => (
-                          <div key={label} className="rounded-lg border border-slate-700 bg-slate-900/80 px-3 py-2">
-                            <p className="text-xs uppercase tracking-wide text-slate-500">{label.replace(/_/g, ' ')}</p>
-                            <p className="text-sm text-white mt-1">{String(value)}</p>
+                          <div key={label} className="rounded-lg border border-slate-300 bg-white px-3 py-2">
+                            <p className="text-xs uppercase tracking-wide text-slate-600 font-semibold">{label.replace(/_/g, ' ')}</p>
+                            <p className="text-sm text-slate-900 mt-1 font-medium">{String(value)}</p>
                           </div>
                         ))}
                       </div>
                     </div>
                   </div>
                 ) : (
-                  <div className="rounded-xl border border-dashed border-slate-700 bg-slate-900/60 px-4 py-10 text-center">
-                    <p className="text-slate-300 mb-2">No model result yet.</p>
-                    <p className="text-sm text-slate-500">Run the assessment to see fraud probability, anomaly score, risk level, and explanation here.</p>
+                  <div className="rounded-xl border border-dashed border-slate-300 bg-slate-50 px-4 py-10 text-center">
+                    <p className="text-slate-700 mb-2 font-medium">No model result yet.</p>
+                    <p className="text-sm text-slate-600">Run the assessment to see fraud probability, anomaly score, risk level, and explanation here.</p>
                   </div>
                 )}
               </div>
@@ -359,39 +360,42 @@ export default function DashboardPage() {
         </Card>
 
         {/* Charts Section */}
+        <div className="mb-6">
+          <h3 className="text-xl font-bold text-slate-900 mb-4">Performance Metrics</h3>
+        </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
           {/* Fraud Attempts Over Time */}
-          <Card>
+          <Card className="bg-gradient-to-br from-white to-slate-50">
             <CardHeader>
               <CardTitle>Daily Fraud Detection Metrics</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
+              <div className="space-y-5">
                 <div>
                   <div className="flex justify-between mb-2">
-                    <span className="text-slate-300 text-sm">Attempted Frauds</span>
-                    <span className="text-white font-semibold">127</span>
+                    <span className="text-slate-700 text-sm font-medium">Attempted Frauds</span>
+                    <span className="text-slate-900 font-bold">127</span>
                   </div>
-                  <div className="w-full bg-slate-700 rounded-full h-2">
-                    <div className="bg-cyan-600 h-2 rounded-full" style={{ width: '78%' }}></div>
+                  <div className="w-full bg-slate-200 rounded-full h-3">
+                    <div className="bg-gradient-to-r from-red-500 to-red-600 h-3 rounded-full" style={{ width: '78%' }}></div>
                   </div>
                 </div>
                 <div>
                   <div className="flex justify-between mb-2">
-                    <span className="text-slate-300 text-sm">Successfully Detected</span>
-                    <span className="text-white font-semibold">124</span>
+                    <span className="text-slate-700 text-sm font-medium">Successfully Detected</span>
+                    <span className="text-slate-900 font-bold">124</span>
                   </div>
-                  <div className="w-full bg-slate-700 rounded-full h-2">
-                    <div className="bg-green-600 h-2 rounded-full" style={{ width: '97.6%' }}></div>
+                  <div className="w-full bg-slate-200 rounded-full h-3">
+                    <div className="bg-gradient-to-r from-emerald-500 to-emerald-600 h-3 rounded-full" style={{ width: '97.6%' }}></div>
                   </div>
                 </div>
                 <div>
                   <div className="flex justify-between mb-2">
-                    <span className="text-slate-300 text-sm">False Positives</span>
-                    <span className="text-white font-semibold">3</span>
+                    <span className="text-slate-700 text-sm font-medium">False Positives</span>
+                    <span className="text-slate-900 font-bold">3</span>
                   </div>
-                  <div className="w-full bg-slate-700 rounded-full h-2">
-                    <div className="bg-yellow-600 h-2 rounded-full" style={{ width: '2.4%' }}></div>
+                  <div className="w-full bg-slate-200 rounded-full h-3">
+                    <div className="bg-gradient-to-r from-amber-500 to-amber-600 h-3 rounded-full" style={{ width: '2.4%' }}></div>
                   </div>
                 </div>
               </div>
@@ -399,25 +403,25 @@ export default function DashboardPage() {
           </Card>
 
           {/* Risk Distribution */}
-          <Card>
+          <Card className="bg-gradient-to-br from-white to-slate-50">
             <CardHeader>
               <CardTitle>Risk Level Distribution</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {[
-                  { label: 'Critical (0.9-1.0)', count: 8, color: 'bg-red-600' },
-                  { label: 'High (0.7-0.9)', count: 24, color: 'bg-orange-600' },
-                  { label: 'Medium (0.4-0.7)', count: 65, color: 'bg-yellow-600' },
-                  { label: 'Low (0-0.4)', count: 187, color: 'bg-green-600' },
+                  { label: 'Critical (0.9-1.0)', count: 8, color: 'bg-gradient-to-r from-red-500 to-red-600' },
+                  { label: 'High (0.7-0.9)', count: 24, color: 'bg-gradient-to-r from-orange-500 to-orange-600' },
+                  { label: 'Medium (0.4-0.7)', count: 65, color: 'bg-gradient-to-r from-amber-500 to-amber-600' },
+                  { label: 'Low (0-0.4)', count: 187, color: 'bg-gradient-to-r from-emerald-500 to-emerald-600' },
                 ].map((item) => (
                   <div key={item.label}>
-                    <div className="flex justify-between mb-1">
-                      <span className="text-slate-300 text-sm">{item.label}</span>
-                      <span className="text-slate-400 text-sm">{item.count}</span>
+                    <div className="flex justify-between mb-2">
+                      <span className="text-slate-700 text-sm font-medium">{item.label}</span>
+                      <span className="text-slate-900 text-sm font-bold">{item.count}</span>
                     </div>
-                    <div className="w-full bg-slate-700 rounded-full h-2">
-                      <div className={`${item.color} h-2 rounded-full`} style={{ width: `${(item.count / 284) * 100}%` }}></div>
+                    <div className="w-full bg-slate-200 rounded-full h-3">
+                      <div className={`${item.color} h-3 rounded-full`} style={{ width: `${(item.count / 284) * 100}%` }}></div>
                     </div>
                   </div>
                 ))}
@@ -427,12 +431,15 @@ export default function DashboardPage() {
         </div>
 
         {/* Recent Alerts */}
-        <Card>
+        <div className="mb-6">
+          <h3 className="text-xl font-bold text-slate-900 mb-4">Recent Security Alerts</h3>
+        </div>
+        <Card className="bg-gradient-to-br from-white to-slate-50 shadow-lg">
           <CardHeader>
             <div className="flex justify-between items-center">
               <CardTitle>Recent Suspicious Activities</CardTitle>
               <Link href="/alerts">
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" className="text-blue-600 hover:text-blue-700">
                   View All →
                 </Button>
               </Link>
@@ -447,17 +454,17 @@ export default function DashboardPage() {
                 { id: 4, account: 'ACC-2024-156', amount: '$3,567', time: '1 hour ago', risk: 'High', type: 'Multiple failed attempts' },
                 { id: 5, account: 'ACC-2024-234', amount: '$742', time: '2 hours ago', risk: 'Low', type: 'International transfer' },
               ].map((alert) => (
-                <div key={alert.id} className="flex items-center justify-between p-3 bg-slate-800/50 rounded-lg border border-slate-700 hover:border-slate-600 transition">
+                <div key={alert.id} className="flex items-center justify-between p-4 bg-gradient-to-r from-slate-50 to-white rounded-lg border border-slate-300 hover:border-blue-300 hover:shadow-md transition">
                   <div className="flex-1">
-                    <p className="text-white font-medium">{alert.account}</p>
-                    <p className="text-sm text-slate-400">{alert.type} • {alert.time}</p>
+                    <p className="text-slate-900 font-semibold">{alert.account}</p>
+                    <p className="text-sm text-slate-600">{alert.type} • {alert.time}</p>
                   </div>
                   <div className="text-right ml-4">
-                    <p className="text-white font-semibold">{alert.amount}</p>
-                    <span className={`inline-block px-2 py-1 text-xs rounded-full font-medium mt-1 ${
-                      alert.risk === 'High' ? 'bg-red-500/20 text-red-300' :
-                      alert.risk === 'Medium' ? 'bg-yellow-500/20 text-yellow-300' :
-                      'bg-green-500/20 text-green-300'
+                    <p className="text-slate-900 font-bold">{alert.amount}</p>
+                    <span className={`inline-block px-3 py-1 text-xs rounded-full font-semibold mt-1 ${
+                      alert.risk === 'High' ? 'bg-red-100 text-red-700 border border-red-300' :
+                      alert.risk === 'Medium' ? 'bg-amber-100 text-amber-700 border border-amber-300' :
+                      'bg-emerald-100 text-emerald-700 border border-emerald-300'
                     }`}>
                       {alert.risk} Risk
                     </span>

@@ -7,15 +7,31 @@
   --foreground: 222.2 84% 4.9%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-  }
+body {
+  background-color: rgb(248, 250, 252);
+  color: rgb(30, 41, 59);
+  font-feature-settings: "rounding-mode" 0;
 }
 
-body {
-  background-color: rgb(3, 7, 18);
-  color: rgb(226, 232, 240);
-  font-feature-settings: "rounding-mode" 0;
+/* Smooth transitions */
+body, button, input, select, textarea {
+  transition: background-color 0.2s, color 0.2s;
+}
+
+/* Light theme scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(248, 250, 252);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(203, 213, 225);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(148, 163, 184);
 }

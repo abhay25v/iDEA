@@ -57,12 +57,12 @@ export default function AlertsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-50">
       <NavBar showNav title="FinTrace" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-white mb-2">Fraud Alerts</h2>
-          <p className="text-slate-400">Monitor suspicious transaction alerts in real-time.</p>
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">Fraud Alerts</h2>
+          <p className="text-slate-600">Monitor suspicious transaction alerts in real-time.</p>
           <p className="text-slate-500 text-sm mt-2">
             Review and model analysis now live on the dashboard ML panel.
           </p>
@@ -81,8 +81,8 @@ export default function AlertsPage() {
               onClick={() => setFilter(tab.id)}
               className={`px-4 py-3 text-sm font-medium transition-colors border-b-2 ${
                 filter === tab.id
-                  ? 'border-cyan-500 text-cyan-300'
-                  : 'border-transparent text-slate-400 hover:text-slate-300'
+                  ? 'border-cyan-500 text-cyan-600'
+                  : 'border-transparent text-slate-600 hover:text-slate-700'
               }`}
             >
               {tab.label} <span className="text-xs">({tab.count})</span>
@@ -94,37 +94,37 @@ export default function AlertsPage() {
           {loading ? (
             <Card>
               <CardContent className="text-center py-12">
-                <p className="text-slate-400">Loading alerts...</p>
+                <p className="text-slate-600">Loading alerts...</p>
               </CardContent>
             </Card>
           ) : filteredAlerts.length > 0 ? (
             filteredAlerts.map((alert) => (
-              <Card key={alert._id} className="hover:border-slate-600 transition">
+              <Card key={alert._id} className="hover:border-slate-300 transition">
                 <CardContent>
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-lg font-semibold text-white">{alert.title}</h3>
+                        <h3 className="text-lg font-semibold text-slate-900">{alert.title}</h3>
                         <span className={`px-2.5 py-1 text-xs rounded-full font-medium border ${getSeverityColor(alert.severity)}`}>
                           {alert.severity.toUpperCase()}
                         </span>
-                        <span className="px-2.5 py-1 text-xs rounded-full font-medium bg-slate-700/50 text-slate-300 border border-slate-600">
+                        <span className="px-2.5 py-1 text-xs rounded-full font-medium bg-slate-100 text-slate-700 border border-slate-200">
                           {alert.status.replace(/_/g, ' ')}
                         </span>
                       </div>
-                      <p className="text-slate-300 mb-3">{alert.description}</p>
+                      <p className="text-slate-600 mb-3">{alert.description}</p>
                       <div className="flex items-center gap-6 text-sm flex-wrap">
                         <div>
-                          <p className="text-slate-400">Account ID</p>
-                          <p className="text-white font-mono">{alert.accountId}</p>
+                          <p className="text-slate-500">Account ID</p>
+                          <p className="text-slate-900 font-mono">{alert.accountId}</p>
                         </div>
                         <div>
-                          <p className="text-slate-400">Fraud Score</p>
-                          <p className="text-white font-semibold">{(alert.fraudScore * 100).toFixed(0)}%</p>
+                          <p className="text-slate-500">Fraud Score</p>
+                          <p className="text-slate-900 font-semibold">{(alert.fraudScore * 100).toFixed(0)}%</p>
                         </div>
                         <div>
-                          <p className="text-slate-400">Created</p>
-                          <p className="text-white">{alert.createdAt ? new Date(alert.createdAt).toLocaleDateString() : 'N/A'}</p>
+                          <p className="text-slate-500">Created</p>
+                          <p className="text-slate-900">{alert.createdAt ? new Date(alert.createdAt).toLocaleDateString() : 'N/A'}</p>
                         </div>
                         {alert.investigatorId && (
                           <div>

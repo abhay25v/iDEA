@@ -119,28 +119,28 @@ export default function FIUExportPage() {
 
   if (!mounted || loading || !user) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-500 mb-4"></div>
-          <p className="text-slate-400">Loading...</p>
+          <p className="text-slate-600">Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-slate-50">
       <NavBar showNav title="FinTrace" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-white mb-2">FIU Export Center</h2>
-          <p className="text-slate-400">Generate and download evidence packages for financial investigations.</p>
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">FIU Export Center</h2>
+          <p className="text-slate-600">Generate and download evidence packages for financial investigations.</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
           {/* Quick Export Options */}
-          <Card className="lg:col-span-1 border-green-500/20">
+          <Card className="lg:col-span-1 border-green-500/20 bg-white">
             <CardHeader>
               <CardTitle>Quick Export</CardTitle>
             </CardHeader>
@@ -163,12 +163,12 @@ export default function FIUExportPage() {
             <CardContent>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <p className="text-slate-400 text-sm">Available Alerts</p>
-                  <p className="text-3xl font-bold text-white">{alerts.length}</p>
+                  <p className="text-slate-500 text-sm">Available Alerts</p>
+                  <p className="text-3xl font-bold text-slate-900">{alerts.length}</p>
                 </div>
                 <div>
-                  <p className="text-slate-400 text-sm">Critical Alerts</p>
-                  <p className="text-3xl font-bold text-red-400">{alerts.filter((a) => a.severity === 'critical').length}</p>
+                  <p className="text-slate-500 text-sm">Critical Alerts</p>
+                  <p className="text-3xl font-bold text-red-500">{alerts.filter((a) => a.severity === 'critical').length}</p>
                 </div>
               </div>
             </CardContent>
@@ -188,11 +188,11 @@ export default function FIUExportPage() {
                 {alerts.map((alert) => (
                   <div
                     key={alert._id}
-                    className="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg border border-slate-700 hover:border-slate-600 transition"
+                    className="flex items-center justify-between p-4 bg-white rounded-lg border border-slate-200 hover:border-slate-300 transition"
                   >
                     <div className="flex-1">
-                      <h4 className="text-white font-medium">{alert.title}</h4>
-                      <p className="text-sm text-slate-400">{alert.description}</p>
+                      <h4 className="text-slate-900 font-medium">{alert.title}</h4>
+                      <p className="text-sm text-slate-600">{alert.description}</p>
                       <div className="flex gap-4 mt-2 text-xs text-slate-500">
                         <span>ID: {alert.id}</span>
                         <span>Account: {alert.accountId}</span>
