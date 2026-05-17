@@ -53,6 +53,8 @@ export default function DashboardPage() {
 
     // Simple heuristic to produce a fraud probability between 0 and 1
     let base = Math.min(0.95, Math.max(0.02, amount / 20000 + freq / 50 + velocity / 20));
+    if (age < 90) base += 0.08;
+    else if (age > 365) base -= 0.05;
     if (form.balance_anomaly) base += 0.12;
     if (form.geographic_deviation) base += 0.08;
     if (form.device_mismatch) base += 0.08;

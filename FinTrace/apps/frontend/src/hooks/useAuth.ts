@@ -10,6 +10,16 @@ export interface User {
   role: string;
 }
 
+// Mock user for frontend-only development
+const MOCK_USER: User = {
+  id: 'dev-user-001',
+  email: 'dev@fintrace.local',
+  fullName: 'Dev User',
+  role: 'analyst',
+};
+
+const MOCK_TOKEN = 'dev-token-bypass-123456789';
+
 export function useAuth() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -19,10 +29,17 @@ export function useAuth() {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const token = localStorage.getItem('accessToken');
-        if (token) {
-          const response = await apiClient.get('/auth/me');
-          setUser(response.data.data.user);
+        // Frontend-only bypass: auto-set mock user
+        const existingUser = localStorage.getItem('user');
+        if (!existingUser) {
+          localStorage.setItem('accessToken', MOCK_TOKEN);
+          localStorage.setItem('refreshToken', MOCK_TOKEN);
+          localStorage.setItem('user', JSON.stringify(MOCK_USER));
+        }
+        
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+          setUser(JSON.parse(storedUser));
         }
       } catch (err) {
         localStorage.removeItem('accessToken');
