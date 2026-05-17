@@ -16,7 +16,7 @@ export default function SettingsPage() {
     email: '',
     role: '',
     notifications: true,
-    darkMode: true,
+    darkMode: false,
   });
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function SettingsPage() {
         email: user.email || '',
         role: user.role || '',
         notifications: true,
-        darkMode: true,
+        darkMode: false,
       });
     }
   }, [user]);
@@ -44,23 +44,23 @@ export default function SettingsPage() {
 
   if (!mounted || loading || !user) {
     return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-cyan-500 mb-4"></div>
-          <p className="text-slate-400">Loading...</p>
+          <p className="text-slate-600">Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-white">
       <NavBar showNav title="FinTrace" />
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-white mb-2">Settings</h2>
-          <p className="text-slate-400">Manage your account preferences and system configuration.</p>
+          <h2 className="text-3xl font-bold text-slate-900 mb-2">Settings</h2>
+          <p className="text-slate-600">Manage your account preferences and system configuration.</p>
         </div>
 
         <div className="space-y-6">
@@ -71,32 +71,32 @@ export default function SettingsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <label className="block text-sm text-slate-400 mb-2">Full Name</label>
+                <label className="block text-sm text-slate-600 mb-2">Full Name</label>
                 <input
                   type="text"
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  className="w-full rounded-lg bg-slate-950 border border-slate-700 px-4 py-2 text-white outline-none focus:border-cyan-500"
+                  className="w-full rounded-lg bg-slate-50 border border-slate-200 px-4 py-2 text-slate-900 outline-none focus:border-cyan-500"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-slate-400 mb-2">Email</label>
+                <label className="block text-sm text-slate-600 mb-2">Email</label>
                 <input
                   type="email"
                   value={formData.email}
                   disabled
-                  className="w-full rounded-lg bg-slate-950 border border-slate-700 px-4 py-2 text-slate-500 outline-none cursor-not-allowed"
+                  className="w-full rounded-lg bg-slate-50 border border-slate-200 px-4 py-2 text-slate-500 outline-none cursor-not-allowed"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-slate-400 mb-2">Role</label>
+                <label className="block text-sm text-slate-600 mb-2">Role</label>
                 <input
                   type="text"
                   value={formData.role}
                   disabled
-                  className="w-full rounded-lg bg-slate-950 border border-slate-700 px-4 py-2 text-slate-500 outline-none cursor-not-allowed"
+                  className="w-full rounded-lg bg-slate-50 border border-slate-200 px-4 py-2 text-slate-500 outline-none cursor-not-allowed"
                 />
               </div>
 
@@ -119,10 +119,10 @@ export default function SettingsPage() {
                   onChange={(e) => setFormData({ ...formData, notifications: e.target.checked })}
                   className="w-4 h-4 rounded"
                 />
-                <span className="text-white">Enable email notifications for critical alerts</span>
+                <span className="text-slate-900">Enable email notifications for critical alerts</span>
               </label>
 
-              <p className="text-sm text-slate-500">Critical alerts will be sent to your registered email address immediately.</p>
+              <p className="text-sm text-slate-600">Critical alerts will be sent to your registered email address immediately.</p>
             </CardContent>
           </Card>
 
@@ -133,11 +133,16 @@ export default function SettingsPage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <label className="flex items-center gap-3">
-                <input type="checkbox" checked={formData.darkMode} className="w-4 h-4 rounded" disabled />
-                <span className="text-white">Dark mode (always enabled)</span>
+                <input
+                  type="checkbox"
+                  checked={formData.darkMode}
+                  onChange={(e) => setFormData({ ...formData, darkMode: e.target.checked })}
+                  className="w-4 h-4 rounded"
+                />
+                <span className="text-slate-900">Dark mode</span>
               </label>
 
-              <p className="text-sm text-slate-500">FinTrace uses dark mode for optimal viewing experience and reduced eye strain.</p>
+              <p className="text-sm text-slate-600">Toggle dark mode for the application interface.</p>
             </CardContent>
           </Card>
 

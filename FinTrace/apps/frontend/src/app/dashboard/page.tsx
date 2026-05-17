@@ -44,6 +44,44 @@ const riskBadgeClasses: Record<string, string> = {
 export default function DashboardPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
+  // Generate a plausible mock prediction when backend is unreachable.
+  const generateMockPrediction = (form: AssessmentForm): PredictionResult => {
+    const amount = Number(form.transaction_amount) || 0;
+    const freq = Number(form.transaction_frequency) || 0;
+    const age = Number(form.account_age) || 0;
+    const velocity = Number(form.transfer_velocity) || 0;
+
+    // Simple heuristic to produce a fraud probability between 0 and 1
+    let base = Math.min(0.95, Math.max(0.02, amount / 20000 + freq / 50 + velocity / 20));
+    if (form.balance_anomaly) base += 0.12;
+    if (form.geographic_deviation) base += 0.08;
+    if (form.device_mismatch) base += 0.08;
+    if (form.account_kyc_status === 'rejected') base += 0.08;
+    base = Math.min(0.99, base);
+
+    const fraud_probability = Math.round(base * 100) / 100;
+    const anomaly_score = Math.round(Math.min(1, base * (0.9 + Math.random() * 0.2)) * 100) / 100;
+    const risk_level = fraud_probability > 0.8 ? 'critical' : fraud_probability > 0.6 ? 'high' : fraud_probability > 0.35 ? 'medium' : 'low';
+
+    return {
+      account_id: form.account_id,
+      fraud_probability,
+      anomaly_score,
+      risk_level,
+      features: {
+        transaction_amount: form.transaction_amount,
+        transaction_frequency: form.transaction_frequency,
+        account_age: form.account_age,
+        transfer_velocity: form.transfer_velocity,
+        geographic_deviation: form.geographic_deviation,
+        device_mismatch: form.device_mismatch,
+        balance_anomaly: form.balance_anomaly,
+        account_kyc_status: form.account_kyc_status,
+      },
+      explanation:
+        'This is a locally-generated mock prediction used when the ML backend is unreachable. Treat as a demo placeholder.',
+    };
+  };
   const [mounted, setMounted] = useState(false);
   const [assessmentForm, setAssessmentForm] = useState<AssessmentForm>(defaultAssessmentForm);
   const [prediction, setPrediction] = useState<PredictionResult | null>(null);
@@ -89,7 +127,14 @@ export default function DashboardPage() {
       setPrediction(data);
     } catch (error) {
       console.error('Failed to run ML assessment:', error);
-      setPredictionError('Unable to fetch a live ML result right now. The dashboard will keep showing the last known assessment.');
+      setPredictionError('Unable to fetch a live ML result right now. Showing a local mock result instead.');
+
+      // Provide a plausible mock so the UI still shows realistic data.
+      const mock = generateMockPrediction(form);
+      // small delay to mimic network/backend latency
+      await new Promise((r) => setTimeout(r, 400));
+      // only replace if there's no previous prediction (keep last known if present)
+      setPrediction((prev) => prev ?? mock);
     } finally {
       setPredicting(false);
     }
