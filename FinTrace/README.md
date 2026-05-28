@@ -2,6 +2,18 @@
 
 A comprehensive fraud detection system for tracking suspicious transaction patterns, visualizing account networks, and generating compliance reports.
 
+## Problem Statement
+
+This project addresses PS3: PS3 - Tracking of Funds within Bank for Fraud Detection. FinTrace is a comprehensive, full-stack web platform designed to map and visualize the end-to-end movement 
+of funds across a bank's entire ecosystem. By shifting from tabular data to Graph Analytics, FinTrace treats 
+accounts, branches, and channels as "Nodes" and financial transactions as "Edges." This allows the system to 
+expose hidden financial relationships and visualize the exact trajectory of funds in real-time. 
+
+## Live Demo
+
+- Live demo: [Link](https://idea-taupe.vercel.app/)
+- Demo video: [Link](https://youtu.be/OKnSB5zC5pI)
+
 ## 🎯 Features
 
 ### Core Capabilities
@@ -445,6 +457,17 @@ pytest
 2. Commit changes: `git commit -m 'Add feature xyz'`
 3. Push to branch: `git push origin feature/xyz`
 4. Submit a Pull Request
+
+## **Team**
+
+- **Team Name:** Jai_Hind
+- **Institute:** Indain Institute of Technology Patna
+- **Contributions:**
+  - ML model development, data pipeline, frontend, backend, and documentation (team members listed in project records)
+
+**iDEA 2.0 Phase 2 Submission**
+
+This repository and accompanying materials are submitted as part of the iDEA 2.0 Phase 2 academic challenge.
 
 ## 📄 License
 
